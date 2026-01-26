@@ -5,6 +5,10 @@
           //Initialize Klaviyo object on page load
           !function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}(); 
 </script>
+  <!-- Klaviyo onsite script (required for popups/flyouts) -->
+<script type="text/javascript" async
+  src="https://static.klaviyo.com/onsite/js/RdE3du/klaviyo.js">
+</script>
   
 <style>
 :root{--pad:clamp(14px,2.5vw,28px);--text:#0b1b2b;--muted:rgba(11,27,43,.7)}
@@ -19,7 +23,10 @@ footer{padding:var(--pad);text-align:center}
 .contact{margin:10px 0 0;font-size:14px}
 .contact a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(11,27,43,.25)}
 .contact a:hover,.contact a:focus{border-bottom-color:rgba(11,27,43,.65)}
-</style></head>
+</style>
+</head>
+
+
 <body><header><img class="logo" src="assets/logo.png" alt="Patterns of Learning logo"></header><main></main>
 <footer><p class="brand">Patterns of Learning</p><p class="copy">© <span id="y"></span> Patterns of Learning. All rights reserved.</p><p class="contact"><a href="mailto:info@patternsoflearning.com">info@patternsoflearning.com</a></p></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script></body></html>
