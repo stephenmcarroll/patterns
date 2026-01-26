@@ -9,6 +9,16 @@
 <script type="text/javascript" async
   src="https://static.klaviyo.com/onsite/js/RdE3du/klaviyo.js">
 </script>
+
+
+
+<script>
+  window._klOnsite = window._klOnsite || [];
+  document.getElementById('openSignup').addEventListener('click', function (e) {
+    e.preventDefault();
+    window._klOnsite.push(['openForm', 'R85LLi']);
+  });
+</script>
   
 <style>
 :root{--pad:clamp(14px,2.5vw,28px);--text:#0b1b2b;--muted:rgba(11,27,43,.7)}
@@ -25,7 +35,7 @@ footer{padding:var(--pad);text-align:center}
 .contact a:hover,.contact a:focus{border-bottom-color:rgba(11,27,43,.65)}
 </style>
 </head>
-
+<a href="#" id="openSignup">Open signup popup</a>
 
 <body><header><img class="logo" src="assets/logo.png" alt="Patterns of Learning logo"></header><main></main>
 <footer><p class="brand">Patterns of Learning</p><p class="copy">© <span id="y"></span> Patterns of Learning. All rights reserved.</p><p class="contact"><a href="mailto:info@patternsoflearning.com">info@patternsoflearning.com</a></p></footer>
