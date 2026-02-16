@@ -9,42 +9,93 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MQ72B55R');</script>
 <!-- End Google Tag Manager -->
 
-
-  
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <!-- REQUIRED: Klaviyo onsite script -->
   <script async src="https://static.klaviyo.com/onsite/js/RdE3du/klaviyo.js"></script>
-
   <style>
     :root{--pad:clamp(14px,2.5vw,28px);--text:#0b1b2b;--muted:rgba(11,27,43,.7)}
     *{box-sizing:border-box}html,body{height:100%}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:#fff;display:flex;flex-direction:column;min-height:100vh}
     header{padding:var(--pad);display:flex;justify-content:flex-end}
     .logo{width:clamp(140px,18vw,260px);max-width:45vw;height:auto;display:block}
-    main{flex:1;padding:var(--pad)}
+    main{flex:1;padding:var(--pad);display:flex;flex-direction:column;gap:clamp(14px,2vw,22px)}
     footer{padding:var(--pad);text-align:center}
+
     .brand{margin:0 0 6px;font-weight:600;font-size:clamp(14px,2.2vw,18px)}
     .copy{margin:0;font-size:13px;color:var(--muted)}
     .contact{margin:10px 0 0;font-size:14px}
     .contact a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(11,27,43,.25)}
     .contact a:hover,.contact a:focus{border-bottom-color:rgba(11,27,43,.65)}
+
+    /* Variant image area */
+    .variant-wrap{
+      width:min(1100px,100%);
+      margin:0 auto;
+      display:flex;
+      gap:clamp(14px,2vw,28px);
+      align-items:flex-start;
+      justify-content:center;
+      flex-wrap:nowrap;              /* side-by-side on desktop */
+    }
+    .variant-card{
+      flex:1 1 0;                    /* two equal columns */
+      max-width:none;
+    }
+    .variant-card img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* Stack on mobile */
+    @media (max-width: 768px){
+      .variant-wrap{
+        flex-direction:column;       /* stack */
+        flex-wrap:nowrap;
+      }
+      .variant-card{
+        width:100%;
+      }
+    }
+
+    /* Signup link moved to bottom-middle of main */
+    .signup-wrap{
+      margin-top:auto;
+      text-align:center;
+      padding-top:clamp(10px,1.5vw,18px);
+    }
+    #openSignup{
+      display:inline-block;
+      font-size:14px;
+      color:var(--text);
+      text-decoration:none;
+      border-bottom:1px solid rgba(11,27,43,.25);
+      padding:6px 2px;
+    }
+    #openSignup:hover,#openSignup:focus{
+      border-bottom-color:rgba(11,27,43,.65);
+    }
   </style>
 </head>
-
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ72B55R"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-  
+
   <header>
     <img class="logo" src="assets/logo.png" alt="Patterns of Learning logo">
   </header>
 
   <main>
-    <a href="#" id="openSignup">Open signup popup</a>
+    <!-- Images render here based on ?variant=a|b -->
+    <section class="variant-wrap" id="variantWrap" aria-label="Variant images"></section>
+
+    <!-- Signup link now bottom-middle, just above footer -->
+    <div class="signup-wrap">
+      <a href="#" id="openSignup">Open signup popup</a>
+    </div>
   </main>
 
   <footer>
@@ -54,13 +105,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </footer>
 
   <script>
+    // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
+    // Klaviyo form trigger
     window._klOnsite = window._klOnsite || [];
     document.getElementById('openSignup').addEventListener('click', function (e) {
       e.preventDefault();
       window._klOnsite.push(['openForm', 'R85LLi']);
     });
+
+    // Variant image logic
+    const ARTICHOKE_IMG = "assets/artichoke_bits.png";   // <-- replace
+    const BLUEBERRY_IMG = "assets/blueberry_bits.png"; // <-- replace
+
+    const params = new URLSearchParams(window.location.search);
+    const variant = (params.get('variant') || '').toLowerCase();
+
+    const wrap = document.getElementById('variantWrap');
+
+    function card(imgSrc, alt) {
+      const div = document.createElement('div');
+      div.className = 'variant-card';
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = alt;
+      div.appendChild(img);
+      return div;
+    }
+
+    if (variant === 'a') {
+      wrap.appendChild(card(ARTICHOKE_IMG, "Artichoke diagram"));
+    } else if (variant === 'b') {
+      wrap.appendChild(card(BLUEBERRY_IMG, "Blueberries diagram"));
+    } else {
+      // No variant: show both side-by-side (artichoke left, blueberries right)
+      wrap.appendChild(card(ARTICHOKE_IMG, "Artichoke diagram"));
+      wrap.appendChild(card(BLUEBERRY_IMG, "Blueberries diagram"));
+    }
   </script>
 </body>
 </html>
